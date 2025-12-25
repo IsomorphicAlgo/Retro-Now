@@ -102,7 +102,7 @@ This document outlines the iterative development plan for the Retro-Now Android 
 ---
 
 ## Stage 2: Core UI - Home Dashboard
-**Status**: Not Started  
+**Status**: ✅ Completed  
 **Goal**: Build the main home screen with planet status tiles
 
 ### Tasks:
@@ -407,8 +407,8 @@ This document outlines the iterative development plan for the Retro-Now Android 
 ---
 
 ## Current Status
-**Current Stage**: Stage 1 - Data Layer & Calculations ✅ Completed  
-**Next Stage**: Stage 2 - Core UI - Home Dashboard  
+**Current Stage**: Stage 2 - Core UI - Home Dashboard ✅ Completed  
+**Next Stage**: Stage 3 - Planet Detail Screen  
 **Last Updated**: 2024-12-19
 
 ### Stage 0 Completion Summary

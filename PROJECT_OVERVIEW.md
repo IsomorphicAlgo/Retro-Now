@@ -142,3 +142,15 @@ Stage 1 (Data Layer & Calculations) has been completed. The project now has:
 - Application class for database initialization
 - Type converters for LocalDate support
 
+## Stage 2 Completion
+
+Stage 2 (Core UI - Home Dashboard) has been completed. The project now has:
+- HomeScreen composable with gradient background (blue/green/purple theme)
+- HomeViewModel with StateFlow-based state management
+- PlanetTile component displaying planet status, retrograde indicator, and days remaining
+- Navigation Component with NavGraph and route definitions
+- TopAppBar with menu button
+- Loading states and error handling
+- Visual status indicators (red for active retrograde, teal for direct motion)
+- Single-column layout displaying all 8 planets
+

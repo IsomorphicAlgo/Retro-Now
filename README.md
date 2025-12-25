@@ -36,8 +36,8 @@ Retro-Now is an educational app focused on displaying the current retrograde sta
 
 ## Project Status
 
-**Current Stage**: Stage 1 - Data Layer & Calculations ✅ Completed  
-**Next Stage**: Stage 2 - Core UI - Home Dashboard
+**Current Stage**: Stage 2 - Core UI - Home Dashboard ✅ Completed  
+**Next Stage**: Stage 3 - Planet Detail Screen
 
 See [ITERATIVE_PLAN.md](./ITERATIVE_PLAN.md) for detailed development stages.
 
@@ -54,6 +54,14 @@ See [ITERATIVE_PLAN.md](./ITERATIVE_PLAN.md) for detailed development stages.
 - Pre-calculated retrograde data (2024-2030)
 - Educational content structure
 - Database initialization system
+
+### Stage 2 Completed
+- Home screen with planet status tiles
+- HomeViewModel with state management
+- Navigation Component setup
+- Visual status indicators
+- Days remaining display
+- Loading and error states
 
 ## Development
 
