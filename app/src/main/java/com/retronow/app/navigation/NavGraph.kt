@@ -44,8 +44,10 @@ fun RetroNowNavGraph(
         
         composable(Routes.PLANET_DETAIL) { backStackEntry ->
             val planetId = backStackEntry.arguments?.getString("planetId") ?: ""
-            // TODO: Implement PlanetDetailScreen in Stage 3
-            // PlanetDetailScreen(planetId = planetId)
+            com.retronow.app.ui.planetdetail.PlanetDetailScreen(
+                planetId = planetId,
+                onBackClick = { navController.popBackStack() }
+            )
         }
         
         composable(Routes.CALENDAR) {
