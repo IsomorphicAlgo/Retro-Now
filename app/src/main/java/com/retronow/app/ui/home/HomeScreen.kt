@@ -32,6 +32,7 @@ import com.retronow.app.data.database.DatabaseProvider
 import com.retronow.app.ui.theme.RetrogradeBlue
 import com.retronow.app.ui.theme.RetrogradeGreen
 import com.retronow.app.ui.theme.RetrogradePurple
+import com.retronow.app.ui.ads.BannerAd
 import com.retronow.app.utils.RetrogradeCalculator
 
 /**
@@ -216,17 +217,26 @@ fun HomeScreen(
                             }
                         }
                     } else {
-                        LazyColumn(
-                            modifier = Modifier.fillMaxSize(),
-                            contentPadding = PaddingValues(vertical = 8.dp),
-                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        Column(
+                            modifier = Modifier.fillMaxSize()
                         ) {
-                            items(uiState.planetStatuses) { status ->
-                                PlanetTile(
-                                    status = status,
-                                    onClick = { onPlanetClick(status.planet.id) }
-                                )
+                            LazyColumn(
+                                modifier = Modifier.weight(1f),
+                                contentPadding = PaddingValues(vertical = 8.dp),
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                items(uiState.planetStatuses) { status ->
+                                    PlanetTile(
+                                        status = status,
+                                        onClick = { onPlanetClick(status.planet.id) }
+                                    )
+                                }
                             }
+                            
+                            // Banner ad at bottom
+                            BannerAd(
+                                modifier = Modifier.fillMaxWidth()
+                            )
                         }
                     }
                 }

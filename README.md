@@ -130,6 +130,13 @@ app/
 
 The app features a blue/green/purple color scheme with background images for each key screen. The design is clean, minimalist, and astronomy-inspired.
 
+## AdMob & Play Store Setup
+
+See [ADMOB_AND_PLAY_STORE_GUIDE.md](./ADMOB_AND_PLAY_STORE_GUIDE.md) for detailed instructions on:
+- Setting up AdMob (currently using test ads)
+- Preparing for Google Play Store release
+- Testing and refinement checklist
+
 ## License
 
 [To be determined]

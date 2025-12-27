@@ -18,6 +18,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.clickable
+import com.retronow.app.domain.model.Planet
 import com.retronow.app.ui.theme.*
 import android.content.Intent
 import android.net.Uri
@@ -28,7 +30,8 @@ import android.net.Uri
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LearnScreen(
-    onBackClick: () -> Unit = {}
+    onBackClick: () -> Unit = {},
+    onPlanetClick: (String) -> Unit = {}
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         // Background gradient overlay
@@ -79,6 +82,54 @@ fun LearnScreen(
                     .padding(horizontal = 16.dp, vertical = 8.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
+                // Planet Information section
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Text(
+                            text = "Planet Information",
+                            style = MaterialTheme.typography.headlineSmall,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "Tap on a planet to learn about its retrograde periods and astrological significance.",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                        )
+                        
+                        // Planet tiles grid (2 columns)
+                        Column(
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Planet.ALL_PLANETS.chunked(2).forEach { rowPlanets ->
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    rowPlanets.forEach { planet ->
+                                        PlanetInfoTile(
+                                            planet = planet,
+                                            onClick = { onPlanetClick(planet.id) },
+                                            modifier = Modifier.weight(1f)
+                                        )
+                                    }
+                                    // Add empty space if odd number of planets
+                                    if (rowPlanets.size == 1) {
+                                        Spacer(modifier = Modifier.weight(1f))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 // What is Retrograde section
                 Card(
                     modifier = Modifier.fillMaxWidth(),
@@ -223,6 +274,39 @@ private fun ResourceLink(
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f),
                 fontSize = 12.sp
+            )
+        }
+    }
+}
+
+/**
+ * Simple planet tile for Learn screen
+ */
+@Composable
+private fun PlanetInfoTile(
+    planet: Planet,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .height(70.dp)
+            .clickable(onClick = onClick),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.8f)
+        )
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(12.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = planet.displayName,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
             )
         }
     }

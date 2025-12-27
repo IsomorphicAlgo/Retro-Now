@@ -4,7 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
@@ -103,7 +105,7 @@ fun CalendarScreen(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Transparent
+                    containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
                 )
             )
             
@@ -177,11 +179,20 @@ fun CalendarScreen(
                         // Week day headers
                         WeekDayHeaders()
                         
-                        // Calendar grid
-                        CalendarGrid(
-                            days = uiState.calendarDays,
+                        // Calendar grid - scrollable to handle rotation
+                        Box(
                             modifier = Modifier.weight(1f)
-                        )
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .verticalScroll(rememberScrollState())
+                            ) {
+                                CalendarGrid(
+                                    days = uiState.calendarDays
+                                )
+                            }
+                        }
                         
                         // Legend
                         PlanetLegend()
@@ -226,17 +237,19 @@ private fun WeekDayHeaders() {
  */
 @Composable
 private fun CalendarGrid(
-    days: List<CalendarDay>,
-    modifier: Modifier = Modifier
+    days: List<CalendarDay>
 ) {
     Column(
-        modifier = modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
     ) {
         // Group days into weeks (7 days per row)
         days.chunked(7).forEach { week ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .wrapContentHeight()
                     .padding(vertical = 2.dp),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
@@ -261,7 +274,8 @@ private fun CalendarDayCell(
 ) {
     Box(
         modifier = modifier
-            .aspectRatio(1f)
+            .fillMaxWidth() // Size based on available width
+            .aspectRatio(1f) // Then make it square
             .padding(4.dp)
             .clip(RoundedCornerShape(8.dp))
             .background(

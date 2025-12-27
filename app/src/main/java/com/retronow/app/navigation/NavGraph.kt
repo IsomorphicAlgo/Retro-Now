@@ -69,7 +69,10 @@ fun RetroNowNavGraph(
         
         composable(Routes.LEARN) {
             com.retronow.app.ui.learn.LearnScreen(
-                onBackClick = { navController.popBackStack() }
+                onBackClick = { navController.popBackStack() },
+                onPlanetClick = { planetId ->
+                    navController.navigate(Routes.planetDetail(planetId))
+                }
             )
         }
         

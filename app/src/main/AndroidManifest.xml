@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
     <application
         android:name=".RetroNowApplication"
@@ -16,9 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RetroNow"
         tools:targetApi="31">
+        
+        <!-- AdMob App ID - Replace with your actual AdMob App ID -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
+        
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:theme="@style/Theme.RetroNow">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

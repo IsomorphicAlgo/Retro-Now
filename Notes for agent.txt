@@ -1,1 +1,5 @@
 ### Notes for agent
+
+- banner up top on calendar and info pages brighter like homepage
+
+-

@@ -1,6 +1,7 @@
 package com.retronow.app
 
 import android.app.Application
+import com.google.android.gms.ads.MobileAds
 import com.retronow.app.data.database.DatabaseProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,6 +13,9 @@ class RetroNowApplication : Application() {
     
     override fun onCreate() {
         super.onCreate()
+        
+        // Initialize AdMob
+        MobileAds.initialize(this) {}
         
         // Initialize database and seed data in background
         applicationScope.launch {

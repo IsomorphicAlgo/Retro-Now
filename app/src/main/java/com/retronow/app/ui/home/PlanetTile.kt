@@ -37,28 +37,23 @@ fun PlanetTile(
     ) {
         Card(
             modifier = Modifier
-                .fillMaxWidth(0.5f) // Half width
+                .fillMaxWidth(0.65f) // 65% width (wider for longer planet names)
+                .wrapContentHeight() // Auto-size to content
                 .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-        // Square container with auto-sizing content
-        Box(
+        // Container with auto-sizing content
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1f) // Makes it square
-                .padding(16.dp)
+                .wrapContentHeight()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .align(Alignment.Center),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
                 // Planet name and status
                 Column(
                     modifier = Modifier.weight(1f),
@@ -138,7 +133,6 @@ fun PlanetTile(
                     }
                 }
             }
-        }
         }
     }
 }
