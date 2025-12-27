@@ -1,5 +1,6 @@
 package com.retronow.app.ui.learn
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -13,12 +14,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.clickable
+import com.retronow.app.R
 import com.retronow.app.domain.model.Planet
 import com.retronow.app.ui.theme.*
 import android.content.Intent
@@ -34,16 +38,23 @@ fun LearnScreen(
     onPlanetClick: (String) -> Unit = {}
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
-        // Background gradient overlay
+        // Background image
+        Image(
+            painter = painterResource(id = R.drawable.learn_background),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+        
+        // Semi-transparent overlay for better text readability
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
-                            RetrogradeBlue.copy(alpha = 0.8f),
-                            RetrogradePurple.copy(alpha = 0.8f),
-                            RetrogradeGreen.copy(alpha = 0.8f)
+                            Color.Black.copy(alpha = 0.3f),
+                            Color.Black.copy(alpha = 0.2f)
                         )
                     )
                 )

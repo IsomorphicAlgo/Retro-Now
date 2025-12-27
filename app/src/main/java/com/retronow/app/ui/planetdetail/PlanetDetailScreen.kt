@@ -34,6 +34,7 @@ import com.retronow.app.ui.theme.InactiveRetrograde
 import com.retronow.app.ui.theme.RetrogradeBlue
 import com.retronow.app.ui.theme.RetrogradeGreen
 import com.retronow.app.ui.theme.RetrogradePurple
+import com.retronow.app.ui.ads.BannerAd
 import com.retronow.app.utils.RetrogradeCalculator
 import java.time.format.DateTimeFormatter
 
@@ -64,22 +65,16 @@ fun PlanetDetailScreen(
     
     Box(modifier = Modifier.fillMaxSize()) {
         // Background image
-        Image(
-            painter = painterResource(id = R.drawable.details_background),
-            contentDescription = null,
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
-        )
-        
-        // Semi-transparent overlay for better text readability
+        // We'll use a gradient instead of image resource to avoid build errors if resource is missing
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
-                            Color.Black.copy(alpha = 0.3f),
-                            Color.Black.copy(alpha = 0.2f)
+                            RetrogradeBlue.copy(alpha = 0.8f),
+                            RetrogradePurple.copy(alpha = 0.8f),
+                            RetrogradeGreen.copy(alpha = 0.8f)
                         )
                     )
                 )
@@ -285,37 +280,45 @@ private fun PlanetDetailContent(
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                
-                Divider()
-                
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Column {
-                        Text(
-                            text = "Typical Duration",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                        )
-                        Text(
-                            text = planetInfo.typicalDuration,
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium
-                        )
-                    }
-                    Column {
-                        Text(
-                            text = "Frequency",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                        )
-                        Text(
-                            text = planetInfo.frequency,
-                            style = MaterialTheme.typography.bodyMedium,
-                            fontWeight = FontWeight.Medium
-                        )
-                    }
+            }
+        }
+        
+        // Duration & Frequency Card
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
+            )
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Typical Duration",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                    )
+                    Text(
+                        text = planetInfo.typicalDuration,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = "Frequency",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                    )
+                    Text(
+                        text = planetInfo.frequency,
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium
+                    )
                 }
             }
         }
@@ -369,6 +372,11 @@ private fun PlanetDetailContent(
                 }
             }
         }
+        
+        // Banner ad at bottom
+        BannerAd(
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }
 
@@ -378,7 +386,7 @@ private fun RetrogradePeriodItem(period: com.retronow.app.domain.model.Retrograd
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.spacedBy(32.dp) 
     ) {
         Column {
             Text(
@@ -418,7 +426,7 @@ private fun PlanetSelectorDialog(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(vertical = 8.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
+                        horizontalArrangement = Arrangement.spacedBy(32.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(

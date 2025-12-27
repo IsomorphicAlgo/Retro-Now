@@ -130,21 +130,35 @@ fun HomeScreen(
                     }
                 },
                 actions = {
-                    IconButton(
-                        onClick = { viewModel.toggleShowOnlyRetrograde() }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        Icon(
-                            imageVector = if (uiState.showOnlyRetrograde) {
-                                Icons.Default.VisibilityOff
+                        Text(
+                            text = if (uiState.showOnlyRetrograde) {
+                                "Show all"
                             } else {
-                                Icons.Default.Visibility
+                                "Hide non-retrograde"
                             },
-                            contentDescription = if (uiState.showOnlyRetrograde) {
-                                "Show all planets"
-                            } else {
-                                "Show only retrograde planets"
-                            }
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurface
                         )
+                        IconButton(
+                            onClick = { viewModel.toggleShowOnlyRetrograde() }
+                        ) {
+                            Icon(
+                                imageVector = if (uiState.showOnlyRetrograde) {
+                                    Icons.Default.VisibilityOff
+                                } else {
+                                    Icons.Default.Visibility
+                                },
+                                contentDescription = if (uiState.showOnlyRetrograde) {
+                                    "Show all planets"
+                                } else {
+                                    "Show only retrograde planets"
+                                }
+                            )
+                        }
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
