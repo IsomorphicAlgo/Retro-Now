@@ -179,7 +179,7 @@ This document outlines the iterative development plan for the Retro-Now Android 
 ---
 
 ## Stage 4: Calendar View
-**Status**: Not Started  
+**Status**: ✅ Completed  
 **Goal**: Implement calendar showing retrograde periods
 
 ### Tasks:
@@ -423,9 +423,9 @@ This document outlines the iterative development plan for the Retro-Now Android 
 ---
 
 ## Current Status
-**Current Stage**: Stage 3 - Planet Detail Screen ✅ Completed  
-**Next Stage**: Stage 4 - Calendar View  
-**Last Updated**: 2024-12-19 (UI improvements and filter functionality)
+**Current Stage**: Stage 4 - Calendar View ✅ Completed  
+**Next Stage**: Stage 5 - Learn & Settings Screens  
+**Last Updated**: 2024-12-19 (Stage 4 - Calendar View completed)
 
 ### Stage 0 Completion Summary
 - ✅ Android project initialized with Kotlin
@@ -485,3 +485,16 @@ This document outlines the iterative development plan for the Retro-Now Android 
   - Toggle button in top bar (eye icon) to switch between filtered and all planets view
   - Filter preference is persisted using SharedPreferences
   - Shows helpful message when no planets are in retrograde
+
+### Stage 4 Completion Summary
+- ✅ CalendarViewModel created with month navigation and retrograde data loading
+- ✅ CalendarScreen with month view layout displaying day grid
+- ✅ Month navigation (previous/next buttons and "Today" button)
+- ✅ Retrograde visualization with colored lines for each planet
+- ✅ Different colors assigned to each planet (Mercury, Venus, Mars, Jupiter, Saturn, Uranus, Neptune, Pluto)
+- ✅ Planet color legend displayed at bottom of calendar
+- ✅ Handles month boundaries correctly (shows days from previous/next month)
+- ✅ Loads retrograde data for adjacent months to show periods across boundaries
+- ✅ Today's date highlighted with border
+- ✅ Days from adjacent months shown with reduced opacity
+- ✅ Navigation integrated with back button support

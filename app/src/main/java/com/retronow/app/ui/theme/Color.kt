@@ -18,3 +18,13 @@ val RetrogradePurple = Color(0xFF4A2C5A)
 val ActiveRetrograde = Color(0xFFFF6B6B)
 val InactiveRetrograde = Color(0xFF4ECDC4)
 
+// Planet colors for calendar visualization
+val MercuryColor = Color(0xFF8B8B8B) // Gray
+val VenusColor = Color(0xFFFFC649) // Yellow/Gold
+val MarsColor = Color(0xFFFF6B6B) // Red
+val JupiterColor = Color(0xFFD4A574) // Brown/Tan
+val SaturnColor = Color(0xFFFAD5A5) // Light Yellow
+val UranusColor = Color(0xFF4ECDC4) // Cyan/Teal
+val NeptuneColor = Color(0xFF4166F5) // Blue
+val PlutoColor = Color(0xFF8B6F47) // Brown
+

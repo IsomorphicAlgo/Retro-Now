@@ -36,8 +36,8 @@ Retro-Now is an educational app focused on displaying the current retrograde sta
 
 ## Project Status
 
-**Current Stage**: Stage 3 - Planet Detail Screen ✅ Completed  
-**Next Stage**: Stage 4 - Calendar View
+**Current Stage**: Stage 4 - Calendar View ✅ Completed  
+**Next Stage**: Stage 5 - Learn & Settings Screens
 
 See [ITERATIVE_PLAN.md](./ITERATIVE_PLAN.md) for detailed development stages.
 
@@ -69,6 +69,15 @@ See [ITERATIVE_PLAN.md](./ITERATIVE_PLAN.md) for detailed development stages.
 - Current retrograde status display
 - Upcoming and past retrograde periods
 - Navigation from home to detail screen
+
+### Stage 4 Completed
+- Calendar month view with day grid
+- Month navigation (previous/next buttons)
+- "Today" button to jump to current month
+- Retrograde visualization with colored lines for each planet
+- Planet color legend
+- Handles month boundaries correctly
+- Shows retrograde periods across adjacent months
 
 ### Fixes & Improvements (New!)
 - **Build System Repair**: Fixed file locking issues and Gradle version mismatches.

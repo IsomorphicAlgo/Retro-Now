@@ -51,8 +51,9 @@ fun RetroNowNavGraph(
         }
         
         composable(Routes.CALENDAR) {
-            // TODO: Implement CalendarScreen in Stage 4
-            // CalendarScreen()
+            com.retronow.app.ui.calendar.CalendarScreen(
+                onBackClick = { navController.popBackStack() }
+            )
         }
         
         composable(Routes.LEARN) {
