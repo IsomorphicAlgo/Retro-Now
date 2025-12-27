@@ -8,7 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.Today
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -86,7 +86,7 @@ fun CalendarScreen(
                 actions = {
                     IconButton(onClick = { viewModel.goToToday() }) {
                         Icon(
-                            imageVector = Icons.Default.Today,
+                            imageVector = Icons.Default.DateRange, // Using DateRange instead of Today
                             contentDescription = "Today"
                         )
                     }
@@ -390,4 +390,3 @@ private fun PlanetLegend() {
         }
     }
 }
-

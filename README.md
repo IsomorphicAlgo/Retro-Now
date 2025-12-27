@@ -36,8 +36,8 @@ Retro-Now is an educational app focused on displaying the current retrograde sta
 
 ## Project Status
 
-**Current Stage**: Stage 4 - Calendar View ✅ Completed  
-**Next Stage**: Stage 5 - Learn & Settings Screens
+**Current Stage**: Stage 5 - Learn & Settings Screens ✅ Completed  
+**Next Stage**: Stage 6 - Notifications (Optional Feature)
 
 See [ITERATIVE_PLAN.md](./ITERATIVE_PLAN.md) for detailed development stages.
 
@@ -78,6 +78,17 @@ See [ITERATIVE_PLAN.md](./ITERATIVE_PLAN.md) for detailed development stages.
 - Planet color legend
 - Handles month boundaries correctly
 - Shows retrograde periods across adjacent months
+
+### Stage 5 Completed
+- Learn screen with educational content about retrogrades
+- Educational resource links (clickable, opens in browser)
+- Disclaimer section
+- Settings screen with theme toggle (light/dark mode)
+- About section with app information
+- Notification settings placeholder
+- Menu dropdown navigation from home screen
+- Complete navigation between all screens
+- Theme preference persistence
 
 ### Fixes & Improvements (New!)
 - **Build System Repair**: Fixed file locking issues and Gradle version mismatches.

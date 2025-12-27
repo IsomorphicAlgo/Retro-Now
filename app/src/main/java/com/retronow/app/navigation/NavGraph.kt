@@ -25,7 +25,9 @@ object Routes {
 @Composable
 fun RetroNowNavGraph(
     navController: NavHostController,
-    startDestination: String = Routes.HOME
+    startDestination: String = Routes.HOME,
+    isDarkTheme: Boolean = false,
+    onThemeToggle: (Boolean) -> Unit = {}
 ) {
     NavHost(
         navController = navController,
@@ -34,10 +36,19 @@ fun RetroNowNavGraph(
         composable(Routes.HOME) {
             HomeScreen(
                 onMenuClick = {
-                    // TODO: Open navigation drawer or menu
+                    // Menu handled by dropdown
                 },
                 onPlanetClick = { planetId ->
                     navController.navigate(Routes.planetDetail(planetId))
+                },
+                onNavigateToCalendar = {
+                    navController.navigate(Routes.CALENDAR)
+                },
+                onNavigateToLearn = {
+                    navController.navigate(Routes.LEARN)
+                },
+                onNavigateToSettings = {
+                    navController.navigate(Routes.SETTINGS)
                 }
             )
         }
@@ -57,13 +68,17 @@ fun RetroNowNavGraph(
         }
         
         composable(Routes.LEARN) {
-            // TODO: Implement LearnScreen in Stage 5
-            // LearnScreen()
+            com.retronow.app.ui.learn.LearnScreen(
+                onBackClick = { navController.popBackStack() }
+            )
         }
         
         composable(Routes.SETTINGS) {
-            // TODO: Implement SettingsScreen in Stage 5
-            // SettingsScreen()
+            com.retronow.app.ui.settings.SettingsScreen(
+                onBackClick = { navController.popBackStack() },
+                isDarkTheme = isDarkTheme,
+                onThemeToggle = onThemeToggle
+            )
         }
     }
 }

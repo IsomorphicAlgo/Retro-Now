@@ -1,17 +1,1 @@
 ### Notes for agent
-
-The planet info tiles should auto size to the amount of text inside. Mercury has a ton of blank space in the first tile. 
-
-Have a option to hide the planets not in retrograde on the front page. This should be the preset when folks first open the app. 
-
-Make the tiles square, still only one column. 
-
-### Notes for future functionality and ideas:
-
-What does the planet mean astrologically (what it governs). What does it mean when in retrograde. 
-
-Include links for deeper effects to the signs. Eventually include on it's own. 
-
-Plug in birth information, highlight most affected + full relational descriptions.
-
-Menu bar (3 bars) functionality (need to program)

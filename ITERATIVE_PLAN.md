@@ -217,7 +217,7 @@ This document outlines the iterative development plan for the Retro-Now Android 
 ---
 
 ## Stage 5: Learn & Settings Screens
-**Status**: Not Started  
+**Status**: ✅ Completed  
 **Goal**: Complete remaining screens
 
 ### Tasks:
@@ -423,9 +423,9 @@ This document outlines the iterative development plan for the Retro-Now Android 
 ---
 
 ## Current Status
-**Current Stage**: Stage 4 - Calendar View ✅ Completed  
-**Next Stage**: Stage 5 - Learn & Settings Screens  
-**Last Updated**: 2024-12-19 (Stage 4 - Calendar View completed)
+**Current Stage**: Stage 5 - Learn & Settings Screens ✅ Completed  
+**Next Stage**: Stage 6 - Notifications (Optional Feature)  
+**Last Updated**: 2024-12-19 (Stage 5 - Learn & Settings Screens completed)
 
 ### Stage 0 Completion Summary
 - ✅ Android project initialized with Kotlin
@@ -498,3 +498,18 @@ This document outlines the iterative development plan for the Retro-Now Android 
 - ✅ Today's date highlighted with border
 - ✅ Days from adjacent months shown with reduced opacity
 - ✅ Navigation integrated with back button support
+
+### Stage 5 Completion Summary
+- ✅ LearnScreen created with educational content about retrogrades
+- ✅ "What is Retrograde?" section with astronomical explanation
+- ✅ Educational resource links (NASA, Time and Date, Astronomy.com, Britannica)
+- ✅ Clickable resource links that open in browser
+- ✅ Disclaimer section explaining educational purpose
+- ✅ SettingsScreen created with theme toggle
+- ✅ Dark mode toggle with preference persistence (SharedPreferences)
+- ✅ About section with app version and description
+- ✅ Notification settings placeholder for future implementation
+- ✅ Menu dropdown added to HomeScreen with navigation options
+- ✅ Complete navigation graph connecting all screens (Home, Planet Detail, Calendar, Learn, Settings)
+- ✅ Theme state management in MainActivity
+- ✅ All screens accessible via menu navigation

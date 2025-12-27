@@ -10,6 +10,10 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.*
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -37,6 +41,9 @@ import com.retronow.app.utils.RetrogradeCalculator
 fun HomeScreen(
     onMenuClick: () -> Unit = {},
     onPlanetClick: (String) -> Unit = {},
+    onNavigateToCalendar: () -> Unit = {},
+    onNavigateToLearn: () -> Unit = {},
+    onNavigateToSettings: () -> Unit = {},
     viewModel: HomeViewModel = viewModel(
         factory = HomeViewModelFactory(
             RetrogradeCalculator(
@@ -47,6 +54,7 @@ fun HomeScreen(
     )
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    var showMenu by remember { mutableStateOf(false) }
     
     Box(modifier = Modifier.fillMaxSize()) {
         // Background gradient overlay
@@ -81,11 +89,39 @@ fun HomeScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = onMenuClick) {
-                        Icon(
-                            imageVector = Icons.Default.Menu,
-                            contentDescription = "Menu"
-                        )
+                    Box {
+                        IconButton(onClick = { showMenu = true }) {
+                            Icon(
+                                imageVector = Icons.Default.Menu,
+                                contentDescription = "Menu"
+                            )
+                        }
+                        DropdownMenu(
+                            expanded = showMenu,
+                            onDismissRequest = { showMenu = false }
+                        ) {
+                            DropdownMenuItem(
+                                text = { Text("Calendar") },
+                                onClick = {
+                                    showMenu = false
+                                    onNavigateToCalendar()
+                                }
+                            )
+                            DropdownMenuItem(
+                                text = { Text("Learn") },
+                                onClick = {
+                                    showMenu = false
+                                    onNavigateToLearn()
+                                }
+                            )
+                            DropdownMenuItem(
+                                text = { Text("Settings") },
+                                onClick = {
+                                    showMenu = false
+                                    onNavigateToSettings()
+                                }
+                            )
+                        }
                     }
                 },
                 actions = {

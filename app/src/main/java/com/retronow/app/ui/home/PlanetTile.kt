@@ -29,11 +29,16 @@ fun PlanetTile(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
-    Card(
+    Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .clickable(onClick = onClick),
+            .padding(vertical = 8.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth(0.5f) // Half width
+                .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
         ),
@@ -133,6 +138,7 @@ fun PlanetTile(
                     }
                 }
             }
+        }
         }
     }
 }
