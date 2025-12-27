@@ -10,17 +10,18 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
+import com.retronow.app.BuildConfig
 
 /**
  * Banner ad composable for displaying AdMob banner ads
  * 
- * Note: Replace the test ad unit ID with your actual AdMob ad unit ID
- * Test ID: ca-app-pub-3940256099942544/6300978111
+ * Ad Unit ID is loaded from BuildConfig, which reads from local.properties
+ * This keeps sensitive Ad IDs out of version control.
  */
 @Composable
 fun BannerAd(
     modifier: Modifier = Modifier,
-    adUnitId: String = "ca-app-pub-3940256099942544/6300978111" // Test ad unit ID
+    adUnitId: String = BuildConfig.ADMOB_BANNER_AD_UNIT_ID
 ) {
     val context = LocalContext.current
     

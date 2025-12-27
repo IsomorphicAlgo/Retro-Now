@@ -1,5 +1,11 @@
 # Retro-Now: Iterative Development Plan
 
+## Release To-Do List
+1. Get Google Console Account Verified
+2. Get Google Console Phone Verified
+3. Publish to testers
+4. Verify Ad and store space
+
 ## Overview
 This document outlines the iterative development plan for the Retro-Now Android application - a lightweight retrograde status app focused on educational content about planetary retrogrades.
 

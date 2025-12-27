@@ -18,10 +18,10 @@
         android:theme="@style/Theme.RetroNow"
         tools:targetApi="31">
         
-        <!-- AdMob App ID - Replace with your actual AdMob App ID -->
+        <!-- AdMob App ID (loaded from local.properties) -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
+            android:value="${admobAppId}"/>
         
         <activity
             android:name=".ui.MainActivity"

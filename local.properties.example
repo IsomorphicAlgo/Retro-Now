@@ -1,0 +1,14 @@
+## This file is a template for local.properties
+# Copy this file to local.properties and fill in your actual values
+# local.properties is already in .gitignore and will NOT be committed to git
+
+# Location of the Android SDK
+sdk.dir=YOUR_SDK_PATH_HERE
+
+# AdMob Configuration (DO NOT COMMIT THESE TO GIT)
+# Get these from your AdMob account:
+# - App ID: Format is ca-app-pub-XXXXXXXXXXXXXXXX~XXXXXXXXXX
+# - Banner Ad Unit ID: Format is ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX
+ADMOB_APP_ID=your-admob-app-id-here
+ADMOB_BANNER_AD_UNIT_ID=your-banner-ad-unit-id-here
+

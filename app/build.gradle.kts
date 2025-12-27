@@ -4,21 +4,38 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
+// Load local.properties for secure configuration
+val localProperties = java.util.Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localProperties.load(java.io.FileInputStream(localPropertiesFile))
+}
+
 android {
     namespace = "com.retronow.app"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.retronow.app"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = 35
+        versionCode = 3
+        versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+        
+        // Load AdMob IDs from local.properties (secure, not in git)
+        val admobAppId = localProperties.getProperty("ADMOB_APP_ID", "")
+        val admobBannerAdUnitId = localProperties.getProperty("ADMOB_BANNER_AD_UNIT_ID", "")
+        
+        buildConfigField("String", "ADMOB_APP_ID", "\"$admobAppId\"")
+        buildConfigField("String", "ADMOB_BANNER_AD_UNIT_ID", "\"$admobBannerAdUnitId\"")
+        
+        // Also set as manifest placeholder for AndroidManifest.xml
+        manifestPlaceholders["admobAppId"] = admobAppId
     }
 
     buildTypes {
@@ -42,6 +59,7 @@ android {
     
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     
     composeOptions {
