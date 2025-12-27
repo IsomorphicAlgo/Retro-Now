@@ -36,6 +36,7 @@ import java.time.format.DateTimeFormatter
 /**
  * Planet detail screen showing information about a selected planet
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlanetDetailScreen(
     planetId: String?,
@@ -433,4 +434,3 @@ private fun formatDate(date: java.time.LocalDate): String {
     val formatter = DateTimeFormatter.ofPattern("MMM d, yyyy")
     return date.format(formatter)
 }
-

@@ -70,6 +70,17 @@ See [ITERATIVE_PLAN.md](./ITERATIVE_PLAN.md) for detailed development stages.
 - Upcoming and past retrograde periods
 - Navigation from home to detail screen
 
+### Fixes & Improvements (New!)
+- **Build System Repair**: Fixed file locking issues and Gradle version mismatches.
+- **Modernization**: Migrated from deprecated `kapt` to `KSP` (Kotlin Symbol Processing) to fix Java 21 compatibility issues.
+- **Assets**: Added placeholder launcher icons to resolve build errors.
+- **UI Improvements**:
+  - Planet tiles now auto-size to content (fixed blank space issue)
+  - Tiles are now square while maintaining single-column layout
+  - Added filter option to show only planets in retrograde (default on first open)
+  - Filter preference is persisted across app sessions
+  - Added toggle button in top bar to switch between filtered and all planets view
+
 ## Development
 
 This project follows an iterative development approach. Each stage is completed, tested, and approved before proceeding to the next.
@@ -98,5 +109,4 @@ This is a personal project. Contributions are not currently being accepted.
 
 ---
 
-**Last Updated**: 2024-12-19
-
+**Last Updated**: 2024-12-19 (UI improvements and filter functionality)

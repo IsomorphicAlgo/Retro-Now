@@ -395,6 +395,22 @@ This document outlines the iterative development plan for the Retro-Now Android 
 - User journal/notes feature
 - Multi-language support
 
+## Future Functionality Ideas (From Testing Notes)
+- **Enhanced Astrological Content**: 
+  - What each planet governs astrologically
+  - Detailed explanations of what retrograde means for each planet's influence
+  - Links to deeper effects by zodiac signs
+  - Eventually include sign-specific retrograde information as its own feature
+  
+- **Birth Chart Integration**:
+  - Allow users to input birth information
+  - Highlight which planets in retrograde most affect the user based on their chart
+  - Provide full relational descriptions of retrograde effects on personal chart
+  
+- **Menu Bar Functionality**:
+  - Implement full menu bar (3 bars) navigation functionality
+  - Connect to all screens (Learn, Settings, Calendar, etc.)
+
 ---
 
 ## Notes
@@ -409,7 +425,7 @@ This document outlines the iterative development plan for the Retro-Now Android 
 ## Current Status
 **Current Stage**: Stage 3 - Planet Detail Screen ✅ Completed  
 **Next Stage**: Stage 4 - Calendar View  
-**Last Updated**: 2024-12-19
+**Last Updated**: 2024-12-19 (UI improvements and filter functionality)
 
 ### Stage 0 Completion Summary
 - ✅ Android project initialized with Kotlin
@@ -455,3 +471,17 @@ This document outlines the iterative development plan for the Retro-Now Android 
 - ✅ Back navigation support
 - ✅ Loading and error states
 
+### Build System & Modernization Fixes (New!)
+- ✅ Resolved "file locking" build errors caused by OneDrive syncing.
+- ✅ Fixed missing launcher icon errors by adding placeholder assets.
+- ✅ Migrated annotation processing from **kapt** to **KSP** (Kotlin Symbol Processing) to fix Java 21 compatibility issues.
+- ✅ Updated Gradle wrapper to version 8.7 to support Java 21.
+
+### UI Improvements & Polish (New!)
+- ✅ **Planet Tile Auto-Sizing**: Tiles now auto-size to content, eliminating blank space issues (especially for Mercury).
+- ✅ **Square Tiles**: Planet tiles are now square while maintaining single-column layout for better visual consistency.
+- ✅ **Retrograde Filter**: Added option to hide planets not in retrograde on the home screen.
+  - Default behavior: Shows only retrograde planets when app is first opened
+  - Toggle button in top bar (eye icon) to switch between filtered and all planets view
+  - Filter preference is persisted using SharedPreferences
+  - Shows helpful message when no planets are in retrograde

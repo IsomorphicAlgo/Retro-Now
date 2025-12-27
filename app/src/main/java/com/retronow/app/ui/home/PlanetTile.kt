@@ -39,89 +39,98 @@ fun PlanetTile(
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
-        Row(
+        // Square container with auto-sizing content
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+                .aspectRatio(1f) // Makes it square
+                .padding(16.dp)
         ) {
-            // Planet name and status
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .align(Alignment.Center),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = status.planet.displayName,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                
-                // Status indicator
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                // Planet name and status
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    // Status dot
-                    Box(
-                        modifier = Modifier
-                            .size(12.dp)
-                            .clip(RoundedCornerShape(50))
-                            .background(
-                                if (status.isInRetrograde) ActiveRetrograde
-                                else InactiveRetrograde
-                            )
+                    Text(
+                        text = status.planet.displayName,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                     
-                    Text(
-                        text = if (status.isInRetrograde) {
-                            "In Retrograde"
-                        } else {
-                            "Direct"
-                        },
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = if (status.isInRetrograde) {
-                            ActiveRetrograde
-                        } else {
-                            InactiveRetrograde
-                        },
-                        fontWeight = FontWeight.Medium
-                    )
+                    // Status indicator
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        // Status dot
+                        Box(
+                            modifier = Modifier
+                                .size(12.dp)
+                                .clip(RoundedCornerShape(50))
+                                .background(
+                                    if (status.isInRetrograde) ActiveRetrograde
+                                    else InactiveRetrograde
+                                )
+                        )
+                        
+                        Text(
+                            text = if (status.isInRetrograde) {
+                                "In Retrograde"
+                            } else {
+                                "Direct"
+                            },
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = if (status.isInRetrograde) {
+                                ActiveRetrograde
+                            } else {
+                                InactiveRetrograde
+                            },
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
                 }
-            }
-            
-            // Days remaining or next retrograde info
-            Column(
-                horizontalAlignment = Alignment.End,
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                if (status.isInRetrograde && status.daysRemaining > 0) {
-                    Text(
-                        text = "${status.daysRemaining}",
-                        style = MaterialTheme.typography.headlineMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = ActiveRetrograde
-                    )
-                    Text(
-                        text = "days left",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                    )
-                } else if (status.currentPeriod != null) {
-                    Text(
-                        text = "Ends ${formatDate(status.currentPeriod.endDate)}",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
-                        textAlign = TextAlign.End
-                    )
-                } else {
-                    Text(
-                        text = "Not in retrograde",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
-                        textAlign = TextAlign.End
-                    )
+                
+                // Days remaining or next retrograde info
+                Column(
+                    horizontalAlignment = Alignment.End,
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    if (status.isInRetrograde && status.daysRemaining > 0) {
+                        Text(
+                            text = "${status.daysRemaining}",
+                            style = MaterialTheme.typography.headlineMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = ActiveRetrograde
+                        )
+                        Text(
+                            text = "days left",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                        )
+                    } else if (status.currentPeriod != null) {
+                        Text(
+                            text = "Ends ${formatDate(status.currentPeriod.endDate)}",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                            textAlign = TextAlign.End
+                        )
+                    } else {
+                        Text(
+                            text = "Not in retrograde",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                            textAlign = TextAlign.End
+                        )
+                    }
                 }
             }
         }

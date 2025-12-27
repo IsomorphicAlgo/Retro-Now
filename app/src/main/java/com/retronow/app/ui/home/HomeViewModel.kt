@@ -1,5 +1,7 @@
 package com.retronow.app.ui.home
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -30,17 +32,26 @@ data class PlanetStatus(
 data class HomeUiState(
     val planetStatuses: List<PlanetStatus> = emptyList(),
     val isLoading: Boolean = true,
-    val error: String? = null
+    val error: String? = null,
+    val showOnlyRetrograde: Boolean = true // Default to showing only retrograde planets
 )
 
 /**
  * ViewModel for the home screen
  */
 class HomeViewModel(
-    private val calculator: RetrogradeCalculator
+    private val calculator: RetrogradeCalculator,
+    private val context: Context? = null
 ) : ViewModel() {
     
-    private val _uiState = MutableStateFlow(HomeUiState())
+    private val prefs: SharedPreferences? = context?.getSharedPreferences("retro_now_prefs", Context.MODE_PRIVATE)
+    private val defaultShowOnlyRetrograde = true
+    
+    private val _uiState = MutableStateFlow(
+        HomeUiState(
+            showOnlyRetrograde = prefs?.getBoolean("show_only_retrograde", defaultShowOnlyRetrograde) ?: defaultShowOnlyRetrograde
+        )
+    )
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
     
     init {
@@ -56,7 +67,7 @@ class HomeViewModel(
             
             try {
                 val today = LocalDate.now()
-                val statuses = Planet.ALL_PLANETS.map { planet ->
+                val allStatuses = Planet.ALL_PLANETS.map { planet ->
                     val isInRetrograde = calculator.isInRetrograde(planet.id, today)
                     val currentPeriod = calculator.getCurrentRetrogradePeriod(planet.id, today)
                     val daysRemaining = currentPeriod?.daysRemaining(today) ?: 0
@@ -69,8 +80,15 @@ class HomeViewModel(
                     )
                 }
                 
-                _uiState.value = HomeUiState(
-                    planetStatuses = statuses,
+                // Filter based on showOnlyRetrograde preference
+                val filteredStatuses = if (_uiState.value.showOnlyRetrograde) {
+                    allStatuses.filter { it.isInRetrograde }
+                } else {
+                    allStatuses
+                }
+                
+                _uiState.value = _uiState.value.copy(
+                    planetStatuses = filteredStatuses,
                     isLoading = false,
                     error = null
                 )
@@ -89,18 +107,33 @@ class HomeViewModel(
     fun refresh() {
         loadPlanetStatuses()
     }
+    
+    /**
+     * Toggle filter to show only retrograde planets or all planets
+     */
+    fun toggleShowOnlyRetrograde() {
+        val newValue = !_uiState.value.showOnlyRetrograde
+        _uiState.value = _uiState.value.copy(showOnlyRetrograde = newValue)
+        
+        // Persist preference
+        prefs?.edit()?.putBoolean("show_only_retrograde", newValue)?.apply()
+        
+        // Reload with new filter
+        loadPlanetStatuses()
+    }
 }
 
 /**
  * Factory for creating HomeViewModel
  */
 class HomeViewModelFactory(
-    private val calculator: RetrogradeCalculator
+    private val calculator: RetrogradeCalculator,
+    private val context: Context? = null
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return HomeViewModel(calculator) as T
+            return HomeViewModel(calculator, context) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
