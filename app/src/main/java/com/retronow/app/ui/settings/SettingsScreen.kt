@@ -23,7 +23,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.retronow.app.domain.model.Planet
+import com.retronow.app.notifications.NotificationScheduler
 import com.retronow.app.ui.theme.*
+import android.Manifest
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 
 /**
  * Settings screen with theme toggle and about section
@@ -35,6 +41,37 @@ fun SettingsScreen(
     isDarkTheme: Boolean,
     onThemeToggle: (Boolean) -> Unit
 ) {
+    val context = LocalContext.current
+    val prefs = context.getSharedPreferences("retro_now_prefs", Context.MODE_PRIVATE)
+    
+    var notificationsEnabled by remember {
+        mutableStateOf(prefs.getBoolean("notifications_enabled", false))
+    }
+    
+    // Request notification permission
+    val requestPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted && notificationsEnabled) {
+            NotificationScheduler(context).schedulePeriodicNotifications()
+        }
+    }
+    
+    val onNotificationsToggle = { enabled: Boolean ->
+        notificationsEnabled = enabled
+        prefs.edit().putBoolean("notifications_enabled", enabled).apply()
+        
+        if (enabled) {
+            // Request permission if Android 13+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            } else {
+                NotificationScheduler(context).schedulePeriodicNotifications()
+            }
+        } else {
+            NotificationScheduler(context).cancelScheduledNotifications()
+        }
+    }
     Box(modifier = Modifier.fillMaxSize()) {
         // Background gradient overlay
         Box(
@@ -126,7 +163,7 @@ fun SettingsScreen(
                     }
                 }
                 
-                // Notifications section (placeholder)
+                // Notifications section
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(
@@ -135,18 +172,78 @@ fun SettingsScreen(
                 ) {
                     Column(
                         modifier = Modifier.padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         Text(
                             text = "Notifications",
                             style = MaterialTheme.typography.headlineSmall,
                             fontWeight = FontWeight.Bold
                         )
-                        Text(
-                            text = "Notification settings will be available in a future update.",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-                        )
+                        
+                        // Main notification toggle
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = "Enable Notifications",
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                                Text(
+                                    text = "Get notified about retrograde periods",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                                )
+                            }
+                            Switch(
+                                checked = notificationsEnabled,
+                                onCheckedChange = onNotificationsToggle
+                            )
+                        }
+                        
+                        // Per-planet notification controls (shown when notifications enabled)
+                        if (notificationsEnabled) {
+                            Divider()
+                            Text(
+                                text = "Planet Notifications",
+                                style = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "You'll be notified 3 days before, 1 day before, and on the day of retrograde entry/exit.",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                            )
+                            
+                            // Per-planet toggles
+                            Planet.ALL_PLANETS.forEach { planet ->
+                                var planetEnabled by remember {
+                                    mutableStateOf(
+                                        prefs.getBoolean("notifications_${planet.id}", true)
+                                    )
+                                }
+                                
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Text(
+                                        text = planet.displayName,
+                                        style = MaterialTheme.typography.bodyMedium
+                                    )
+                                    Switch(
+                                        checked = planetEnabled,
+                                        onCheckedChange = { enabled ->
+                                            planetEnabled = enabled
+                                            prefs.edit().putBoolean("notifications_${planet.id}", enabled).apply()
+                                        }
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
                 

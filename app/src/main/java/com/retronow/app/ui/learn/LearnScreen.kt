@@ -184,6 +184,7 @@ fun LearnScreen(
 /**
  * Resource link item
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ResourceLink(
     title: String,
@@ -226,4 +227,3 @@ private fun ResourceLink(
         }
     }
 }
-

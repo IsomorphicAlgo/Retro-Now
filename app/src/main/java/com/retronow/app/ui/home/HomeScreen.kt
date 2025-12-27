@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import com.retronow.app.R
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -57,24 +58,27 @@ fun HomeScreen(
     var showMenu by remember { mutableStateOf(false) }
     
     Box(modifier = Modifier.fillMaxSize()) {
-        // Background gradient overlay
+        // Background image
+        Image(
+            painter = painterResource(id = R.drawable.home_background),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+        
+        // Semi-transparent overlay for better text readability
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
-                            RetrogradeBlue.copy(alpha = 0.8f),
-                            RetrogradePurple.copy(alpha = 0.8f),
-                            RetrogradeGreen.copy(alpha = 0.8f)
+                            Color.Black.copy(alpha = 0.3f),
+                            Color.Black.copy(alpha = 0.2f)
                         )
                     )
                 )
         )
-        
-        // Background image (if available)
-        // Note: We'll use a gradient for now since we need to add the image to resources
-        // The image from Pictures folder would need to be added to res/drawable
         
         Column(
             modifier = Modifier.fillMaxSize()
@@ -143,7 +147,7 @@ fun HomeScreen(
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Transparent
+                    containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
                 )
             )
             

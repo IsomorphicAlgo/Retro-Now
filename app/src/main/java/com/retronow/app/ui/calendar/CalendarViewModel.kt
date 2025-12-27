@@ -127,7 +127,11 @@ class CalendarViewModel(
         
         // Calculate how many days from previous month to show
         // DayOfWeek: Monday=1, Tuesday=2, ..., Sunday=7
-        // For calendar starting on Sunday: Sunday=0, Monday=1, ..., Saturday=6
+        // For calendar starting on Sunday, we need to map:
+        // Sunday (7) -> 0
+        // Monday (1) -> 1
+        // ...
+        // Saturday (6) -> 6
         val daysFromPreviousMonth = if (firstDayOfWeek == DayOfWeek.SUNDAY) 0 else firstDayOfWeek.value
         
         // Add days from previous month
@@ -166,18 +170,20 @@ class CalendarViewModel(
         // Add days from next month to fill the last week
         val totalDays = days.size
         val remainingDays = (7 - (totalDays % 7)) % 7
-        val nextMonth = month.plusMonths(1)
-        for (day in 1..remainingDays) {
-            val date = nextMonth.atDay(day)
-            val retrogradePlanets = getRetrogradePlanetsForDate(date, retrogradePeriods)
-            days.add(
-                CalendarDay(
-                    date = date,
-                    isCurrentMonth = false,
-                    isToday = date == today,
-                    retrogradePlanets = retrogradePlanets
+        if (remainingDays > 0) {
+            val nextMonth = month.plusMonths(1)
+            for (day in 1..remainingDays) {
+                val date = nextMonth.atDay(day)
+                val retrogradePlanets = getRetrogradePlanetsForDate(date, retrogradePeriods)
+                days.add(
+                    CalendarDay(
+                        date = date,
+                        isCurrentMonth = false,
+                        isToday = date == today,
+                        retrogradePlanets = retrogradePlanets
+                    )
                 )
-            )
+            }
         }
         
         return days
@@ -214,4 +220,3 @@ class CalendarViewModelFactory(
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
-

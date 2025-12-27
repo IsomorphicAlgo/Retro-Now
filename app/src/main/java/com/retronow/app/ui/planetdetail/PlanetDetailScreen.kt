@@ -20,6 +20,10 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.foundation.Image
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import com.retronow.app.R
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -59,16 +63,23 @@ fun PlanetDetailScreen(
     }
     
     Box(modifier = Modifier.fillMaxSize()) {
-        // Background gradient
+        // Background image
+        Image(
+            painter = painterResource(id = R.drawable.details_background),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
+            contentScale = ContentScale.Crop
+        )
+        
+        // Semi-transparent overlay for better text readability
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(
                     Brush.verticalGradient(
                         colors = listOf(
-                            RetrogradeBlue.copy(alpha = 0.8f),
-                            RetrogradePurple.copy(alpha = 0.8f),
-                            RetrogradeGreen.copy(alpha = 0.8f)
+                            Color.Black.copy(alpha = 0.3f),
+                            Color.Black.copy(alpha = 0.2f)
                         )
                     )
                 )

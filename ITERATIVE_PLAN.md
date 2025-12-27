@@ -247,7 +247,7 @@ This document outlines the iterative development plan for the Retro-Now Android 
 ---
 
 ## Stage 6: Notifications (Optional Feature)
-**Status**: Not Started  
+**Status**: ✅ Completed  
 **Goal**: Implement optional notification system
 
 ### Tasks:
@@ -423,9 +423,9 @@ This document outlines the iterative development plan for the Retro-Now Android 
 ---
 
 ## Current Status
-**Current Stage**: Stage 5 - Learn & Settings Screens ✅ Completed  
-**Next Stage**: Stage 6 - Notifications (Optional Feature)  
-**Last Updated**: 2024-12-19 (Stage 5 - Learn & Settings Screens completed)
+**Current Stage**: Stage 6 - Notifications ✅ Completed  
+**Next Stage**: Stage 7 - Polish & Optimization  
+**Last Updated**: 2024-12-19 (Stage 6 - Notifications completed)
 
 ### Stage 0 Completion Summary
 - ✅ Android project initialized with Kotlin
@@ -513,3 +513,23 @@ This document outlines the iterative development plan for the Retro-Now Android 
 - ✅ Complete navigation graph connecting all screens (Home, Planet Detail, Calendar, Learn, Settings)
 - ✅ Theme state management in MainActivity
 - ✅ All screens accessible via menu navigation
+
+### Stage 6 Completion Summary
+- ✅ NotificationManager created for sending and managing notifications
+- ✅ Notification channel configured for Android O+
+- ✅ Notification permission request for Android 13+ (POST_NOTIFICATIONS)
+- ✅ RetrogradeNotificationWorker created for background notification checks
+- ✅ NotificationScheduler using WorkManager for periodic checks (every 12 hours)
+- ✅ Notification scheduling logic:
+  - Notifications sent 3 days before retrograde entry/exit
+  - Notifications sent 1 day before retrograde entry/exit
+  - Notifications sent on day of retrograde entry/exit
+- ✅ Per-planet notification preferences (enable/disable per planet)
+- ✅ Notification settings UI in Settings screen:
+  - Main notification toggle
+  - Per-planet notification toggles
+  - Automatic permission request when enabling
+- ✅ Deep link support - notifications open planet detail screen when tapped
+- ✅ Notification scheduling automatically starts when enabled
+- ✅ Notification cancellation when disabled
+- ✅ Background notification checks work offline

@@ -36,8 +36,8 @@ Retro-Now is an educational app focused on displaying the current retrograde sta
 
 ## Project Status
 
-**Current Stage**: Stage 5 - Learn & Settings Screens ✅ Completed  
-**Next Stage**: Stage 6 - Notifications (Optional Feature)
+**Current Stage**: Stage 6 - Notifications ✅ Completed  
+**Next Stage**: Stage 7 - Polish & Optimization
 
 See [ITERATIVE_PLAN.md](./ITERATIVE_PLAN.md) for detailed development stages.
 
@@ -89,6 +89,17 @@ See [ITERATIVE_PLAN.md](./ITERATIVE_PLAN.md) for detailed development stages.
 - Menu dropdown navigation from home screen
 - Complete navigation between all screens
 - Theme preference persistence
+
+### Stage 6 Completed
+- Notification channel configuration
+- Notification permission request (Android 13+)
+- WorkManager integration for background notification scheduling
+- Notification scheduling logic (3 days before, 1 day before, day of entry/exit)
+- Per-planet notification preferences
+- Notification settings UI in Settings screen
+- Notification manager for sending and canceling notifications
+- Deep link support - notifications open planet detail screen
+- Automatic notification scheduling when enabled
 
 ### Fixes & Improvements (New!)
 - **Build System Repair**: Fixed file locking issues and Gradle version mismatches.
